@@ -1,0 +1,56 @@
+# Virtual environment
+runtime/
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Secrets & sensitive data
+.env
+tiktok_cookies.json
+youtube_cookie.json
+youtube_cookies.txt
+
+# Session data (per-instance state)
+data/
+logs/
+downloads/
+
+# Video files
+*.mp4
+*.mkv
+*.webm
+*.mov
+*.part
+*.tmp
+*.ytdl
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (if any)
+node_modules/
+
+# Log files
+*.log
+
+# Environment
+.env.local
+.env.prod
+.env.*.local
