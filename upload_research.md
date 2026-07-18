@@ -1,30 +1,5 @@
 # 🔍 Upload Repo Research — Phân tích chi tiết
 
-## So sánh các repo
-
-| Feature | makiisthenes ⭐1.1K | xChezY | wkaisertexas | haziq-exe | Official API |
-|---------|:---:|:---:|:---:|:---:|:---:|
-| **Phương pháp** | Internal API (HTTP) | Internal API | Browser Automation | **Stealth Browser (Phantomwright)** | REST API (OAuth) |
-| **Auth** | Cookies | Cookies | Cookies | Cookies | OAuth 2.0 |
-| **Proxy** | ❌ | ❌ | ⚠️ Basic | ✅ Native | N/A |
-| **Anti-Detection** | ❌ Minimal | ❌ | ⚠️ Basic | ✅ **Advanced** | N/A |
-| **CAPTCHA Solving** | ❌ | ❌ | ❌ | ✅ Auto (CV) | N/A |
-| **Scheduling** | ⚠️ Basic | ⚠️ Basic | ✅ | ✅ | N/A |
-| **Status** | Low maint. | ❌ Archived | Active-ish | Semi-active | Stable |
-| **Dependencies** | Python + Node.js + Chrome | Python | Python + Playwright | Python + Node.js + Phantomwright | HTTP only |
-
----
-
-## 📊 Phân tích tại sao 19/20 video bị shadowban (makiisthenes)
-
-Mày dùng `makiisthenes/TiktokAutoUploader` với tỉ lệ 1/20 video có view (~5% success). Đây là phân tích root cause:
-
-### Cách `makiisthenes` hoạt động
-- **KHÔNG dùng Selenium/Playwright** cho upload — gửi **HTTP POST trực tiếp** tới internal API TikTok (`/tiktok/web/project/post/v1/`)
-- Dùng Node.js signature generator để compute `msToken`, `X-Bogus`, `_signature`
-- Auth bằng cookie `sessionid` (login 1 lần qua Playwright rồi lưu cookies)
-- **KHÔNG có proxy**, **KHÔNG có anti-detection**, **KHÔNG có delay management**
-
 ### Root causes của 95% fail rate
 
 ```mermaid
@@ -48,7 +23,7 @@ fishbone-v2
         Audio fingerprint match 100%
 ```
 
-| Root Cause | Impact | Có trong makiisthenes? |
+| Root Cause | Impact | ? |
 |-----------|--------|----------------------|
 | Không proxy | 🔴 Critical | ❌ Không có |
 | Không browser fingerprint | 🔴 Critical | ❌ Minimal signature only |
@@ -63,7 +38,7 @@ fishbone-v2
 
 ---
 
-## 🏆 `haziq-exe/TikTokAutoUploader` — Approach tốt nhất hiện tại
+## 🏆 — Approach tốt nhất hiện tại
 
 Repo này có anti-detection **tốt nhất** trong tất cả:
 
@@ -133,7 +108,7 @@ pie title "Yếu tố ảnh hưởng đến Video có View"
 - Tốn RAM (mỗi browser instance ~200-500MB)
 ```
 
-#### Option B: Internal API + Proper Signatures (makiisthenes approach, upgraded)
+#### Option B: Internal API + Proper Signatures
 ```
 + Nhanh (HTTP calls thuần)
 + Ít tốn resource
