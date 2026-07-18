@@ -209,24 +209,9 @@ Proposal: **Random delay 3-5 hours** between each upload, max **4 videos/day/acc
 
 # 🔍 Upload Repo Research — Detailed Analysis
 
-## Repository Comparison
+## 📊 Analysis: Why 19/20 videos get shadowbanned 
 
-| Feature | makiisthenes ⭐1.1K | xChezY | wkaisertexas | haziq-exe | Official API |
-|---------|:---:|:---:|:---:|:---:|:---:|
-| **Method** | Internal API (HTTP) | Internal API | Browser Automation | **Stealth Browser (Phantomwright)** | REST API (OAuth) |
-| **Auth** | Cookies | Cookies | Cookies | Cookies | OAuth 2.0 |
-| **Proxy** | ❌ | ❌ | ⚠️ Basic | ✅ Native | N/A |
-| **Anti-Detection** | ❌ Minimal | ❌ | ⚠️ Basic | ✅ **Advanced** | N/A |
-| **CAPTCHA Solving** | ❌ | ❌ | ❌ | ✅ Auto (CV) | N/A |
-| **Scheduling** | ⚠️ Basic | ⚠️ Basic | ✅ | ✅ | N/A |
-| **Status** | Low maint. | ❌ Archived | Active-ish | Semi-active | Stable |
-| **Dependencies** | Python + Node.js + Chrome | Python | Python + Playwright | Python + Node.js + Phantomwright | HTTP only |
-
----
-
-## 📊 Analysis: Why 19/20 videos get shadowbanned (makiisthenes)
-
-You used `makiisthenes/TiktokAutoUploader` with a 1/20 view success rate (~5%). Here is the root cause analysis:
+Here is the root cause analysis:
 
 ### How `makiisthenes` works
 - **Does NOT use Selenium/Playwright** for uploading — sends **HTTP POST directly** to TikTok's internal API (`/tiktok/web/project/post/v1/`)
@@ -257,7 +242,7 @@ fishbone-v2
         Audio fingerprint matches 100%
 ```
 
-| Root Cause | Impact | Present in makiisthenes? |
+| Root Cause | Impact | Present ? |
 |-----------|--------|----------------------|
 | No proxy | 🔴 Critical | ❌ Missing |
 | No browser fingerprint | 🔴 Critical | ❌ Minimal signature only |
@@ -272,7 +257,7 @@ fishbone-v2
 
 ---
 
-## 🏆 `haziq-exe/TikTokAutoUploader` — Current Best Approach
+## 🏆 — Current Best Approach
 
 This repo features the **best** anti-detection out of the group:
 
@@ -342,7 +327,7 @@ pie title "Factors Influencing Video Views"
 - RAM heavy (~200-500MB per browser instance)
 ```
 
-#### Option B: Internal API + Proper Signatures (makiisthenes approach, upgraded)
+#### Option B: Internal API + Proper Signatures 
 ```text
 + Fast (pure HTTP calls)
 + Low resource footprint
