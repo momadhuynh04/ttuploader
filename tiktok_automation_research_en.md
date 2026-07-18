@@ -213,7 +213,7 @@ Proposal: **Random delay 3-5 hours** between each upload, max **4 videos/day/acc
 
 Here is the root cause analysis:
 
-### How `makiisthenes` works
+### How it works
 - **Does NOT use Selenium/Playwright** for uploading — sends **HTTP POST directly** to TikTok's internal API (`/tiktok/web/project/post/v1/`)
 - Uses a Node.js signature generator to compute `msToken`, `X-Bogus`, `_signature`
 - Auth via `sessionid` cookie (logs in once via Playwright, then saves cookies)
